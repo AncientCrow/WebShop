@@ -25,7 +25,7 @@ class Profile(models.Model):
 
 
 class ProfileIcon(models.Model):
-    icon = models.ImageField(upload_to="users")
+    icon = models.ImageField(upload_to="users/%Y_%m_%d")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:

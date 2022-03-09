@@ -61,13 +61,13 @@ class ProfileDetail(View):
             page_user = get_object_or_404(models.Profile, user_id=user)
             user_icon = models.ProfileIcon.objects.filter(user_id=user).get()
             form = forms.UpdateIcon
-            return render(request, "user/profile_detail.html", {
-                "page_user": page_user,
+            return render(request, "profile/profile_detail.html", {
+                "profile": page_user,
                 "icon": user_icon,
                 "form": form
             })
         except Http404:
-            return render(request, "user/profile_detail.html", {"moderation": True})
+            return render(request, "registration/profile_detail.html", {"moderation": True})
 
     def post(self, request, pk, *args, **kwargs):
         form = forms.UpdateIcon(request.POST, request.FILES)
@@ -85,7 +85,7 @@ class UserEdit(View):
 
     def get(self, request, pk):
         form = forms.UpdateProfile
-        return render(request, "user/profile_edit.html", {"form": form})
+        return render(request, "registration/profile_edit.html", {"form": form})
 
     def post(self, request, pk):
         form = forms.UpdateProfile(request.POST)

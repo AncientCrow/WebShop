@@ -1,0 +1,66 @@
+{% extends 'main/main.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block style %}
+<link href="{% static 'css/profile.css' %}" rel="stylesheet" type="text/css"/>
+<link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block login %}
+
+{% endblock %}
+
+{% block content %}
+    <div id="leftbar">
+        {% if icon %}
+            <img src="{{ icon.icon.url }}" width="100px">
+        {% endif %}
+        {% if user.is_staff == False %}
+            <form method="post" class="to-be-changed" enctype="multipart/form-data">
+                {% csrf_token %}
+                <table>
+                        {% for field in form %}
+                        <tr>
+                            <td>{{ field.label }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ field }}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                <input type="submit" value="{% trans 'Confirm' %}" >
+            </form>
+    </div>
+
+    <div id="rightbar">
+        <p>
+            <strong>{% trans 'About user' %}:</strong>
+            {% if profile.about is None %}
+                {% trans 'Sorry but this user so fast and furious, and ... there no text about him' %}
+            {% else %}
+                {{ profile.about }}
+            {% endif %}
+        </p>
+    </div>
+
+    <div id="middle">
+        <p>
+            <strong>{% trans "Nickname" %}:</strong> {{ profile.user }}
+        </p>
+        <p>
+            <strong>{% trans "Last name"%}:</strong> {{ profile.user.first_name }}
+        </p>
+        <p>
+            <strong>{% trans "First name"%}:</strong> {{ profile.user.last_name }}
+        </p>
+        <p>
+            <strong>{% trans "Birthday" %}:</strong> {{ profile.date }}
+        </p>
+    </div>
+
+
+    <div id="clear">
+    </div>
+{% endif %}
+{% endblock %}

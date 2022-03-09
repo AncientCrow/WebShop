@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-08 21:44+0300\n"
+"POT-Creation-Date: 2022-03-09 18:38+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,18 +29,22 @@ msgid "Profile icon"
 msgstr "Изображение профиля"
 
 #: .\registration\forms.py:16 .\registration\forms.py:41
+#: .\registration\templates\profile\profile_detail.html:49
 msgid "Nickname"
 msgstr "Никнейм"
 
 #: .\registration\forms.py:17 .\registration\forms.py:50
+#: .\registration\templates\profile\profile_detail.html:55
 msgid "First name"
 msgstr "Имя"
 
 #: .\registration\forms.py:18 .\registration\forms.py:51
+#: .\registration\templates\profile\profile_detail.html:52
 msgid "Last name"
 msgstr "Фамилия"
 
 #: .\registration\forms.py:19 .\registration\forms.py:42
+#: .\registration\templates\registration\login.html:21
 msgid "Password"
 msgstr "Пароль"
 
@@ -53,6 +57,7 @@ msgid "Email"
 msgstr "Email"
 
 #: .\registration\forms.py:25
+#: .\registration\templates\profile\profile_detail.html:58
 msgid "Birthday"
 msgstr "День рождения"
 
@@ -112,6 +117,43 @@ msgstr "профиль"
 msgid "profiles"
 msgstr "профили"
 
+#: .\registration\templates\profile\profile_detail.html:32
+msgid "Confirm"
+msgstr "Подтвердить"
+
+#: .\registration\templates\profile\profile_detail.html:38
+
+msgid "About user"
+msgstr "О пользователе"
+
+#: .\registration\templates\profile\profile_detail.html:40
+msgid ""
+"Sorry but this user so fast and furious, and ... there no text about him"
+msgstr "Извините, но этот пользователь настолько быстр и яростен, что текст о нём не успевает за ним."
+
+#: .\registration\templates\registration\login.html:7
+#: .\registration\templates\registration\login.html:26
+#: .\shop\templates\main\main.html:30
+msgid "Log in"
+msgstr "Вход"
+
+#: .\registration\templates\registration\login.html:16
+msgid "Login"
+msgstr "Логин"
+
+#: .\registration\templates\registration\login.html:29
+msgid "Forgot your password?"
+msgstr "Забыли пароль?"
+
+#: .\registration\templates\registration\registration.html:7
+#: .\shop\templates\main\main.html:29
+msgid "Registration"
+msgstr "Регистрация"
+
+#: .\registration\templates\registration\registration.html:22
+msgid "Registrate"
+msgstr "Зарегистрироваться"
+
 #: .\shop\forms.py:7 .\shop\forms.py:29
 msgid "Title"
 msgstr "Название"
@@ -152,47 +194,63 @@ msgstr "статус"
 msgid "image"
 msgstr "изображение"
 
-#: .\shop\templates\main\main.html:45
+#: .\shop\templates\main\main.html:24
+msgid "Hello"
+msgstr "Привет"
+
+#: .\shop\templates\main\main.html:25
+msgid "Profile"
+msgstr "Профиль"
+
+#: .\shop\templates\main\main.html:26
+msgid "Log out"
+msgstr "Выход"
+
+#: .\shop\templates\main\main.html:28
+msgid "Hello anonymous"
+msgstr "Привет аноним"
+
+#: .\shop\templates\main\main.html:60
 msgid "Home"
 msgstr "Домашняя"
 
-#: .\shop\templates\main\main.html:46
+#: .\shop\templates\main\main.html:61
 msgid "About Us"
 msgstr "О нас"
 
-#: .\shop\templates\main\main.html:47 .\shop\templates\shop\goods_list.html:5
+#: .\shop\templates\main\main.html:62 .\shop\templates\shop\goods_list.html:5
 msgid "Goods"
 msgstr "Товары"
 
-#: .\shop\templates\main\main.html:48
+#: .\shop\templates\main\main.html:63
 #: .\shop\templates\shop\services_list.html:5
 msgid "Services"
 msgstr "Услуги"
 
-#: .\shop\templates\main\main.html:49 .\shop\templates\shop\privacy.html:5
+#: .\shop\templates\main\main.html:64 .\shop\templates\shop\privacy.html:5
 msgid "Privacy"
 msgstr "Конфиденциальность"
 
-#: .\shop\templates\main\main.html:50
+#: .\shop\templates\main\main.html:65
 msgid "Contact Us"
 msgstr "Контакты"
 
-#: .\shop\templates\main\main.html:58
+#: .\shop\templates\main\main.html:73
 msgid "Level up your characters!"
 msgstr "Прокачай своего персонажа"
 
-#: .\shop\templates\main\main.html:59
+#: .\shop\templates\main\main.html:74
 msgid ""
 "Are you wanna waste your time in game? Call our drivers, and enjoy your time"
 msgstr ""
 "Ты правда хочешь тратить время в игре? Позови наших драйверов и используй "
 "своё время с пользой"
 
-#: .\shop\templates\main\main.html:64
+#: .\shop\templates\main\main.html:79
 msgid "Boost for your accounts"
 msgstr "Улучши свой аккаунт"
 
-#: .\shop\templates\main\main.html:65
+#: .\shop\templates\main\main.html:80
 msgid ""
 "Are you need some money or items? Call our drivers and they bring it only "
 "for you!"
@@ -200,19 +258,19 @@ msgstr ""
 "Тебе нужны деньги? Предметы? Позови наших драйверов и они принесут их только "
 "для тебя"
 
-#: .\shop\templates\main\main.html:70
+#: .\shop\templates\main\main.html:85
 msgid "ACCOUNTS!"
 msgstr "АККАУНТЫ!"
 
-#: .\shop\templates\main\main.html:71
+#: .\shop\templates\main\main.html:86
 msgid "Need powerful account with something rare? Look for it here!"
 msgstr "Нужен сильнейший аккаунт с чем-нибудь редким? Посмотри тут!"
 
-#: .\shop\templates\main\main.html:76
+#: .\shop\templates\main\main.html:91
 msgid "Game items in short time! Look for it here"
 msgstr "Игровые предметы за короткий срок? Посмотри их здесь"
 
-#: .\shop\templates\main\main.html:77
+#: .\shop\templates\main\main.html:92
 msgid "Rare items! Powerful artifacts! Yea, it is here!"
 msgstr "Редкие предметы! Сильнейшие артефакты! Да, это здесь"
 
@@ -252,8 +310,7 @@ msgstr "Наши предложения"
 #: .\shop\templates\shop\about_us.html:29
 #: .\shop\templates\shop\about_us.html:36
 #: .\shop\templates\shop\about_us.html:44
-#: .\shop\templates\shop\about_us.html:51
-#: .\shop\templates\shop\about_us.html:59
+#: .\shop\templates\shop\about_us.html:52
 msgid "Someday there will be a text here..."
 msgstr "Когда-нибудь тут будет текст"
 
@@ -264,7 +321,6 @@ msgstr "Обслуживание клиентов"
 #: .\shop\templates\shop\about_us.html:30
 #: .\shop\templates\shop\about_us.html:37
 #: .\shop\templates\shop\about_us.html:45
-#: .\shop\templates\shop\about_us.html:52
 msgid "Read More"
 msgstr "Увидеть больше"
 
@@ -276,7 +332,7 @@ msgstr "Наши награды"
 msgid "Global Reach"
 msgstr "Глобальные цели"
 
-#: .\shop\templates\shop\about_us.html:58
+#: .\shop\templates\shop\about_us.html:51
 msgid "Our Commitment"
 msgstr "Наши обязательства"
 
