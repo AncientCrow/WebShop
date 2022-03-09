@@ -1,0 +1,56 @@
+{% extends 'main/main.html' %}
+{% load i18n %}
+{% load static %}
+
+<title>{% block title %}{% trans 'About us'%} {% endblock%}</title>
+{% block content %}
+<div id="container2">
+  <div style="padding:20px 15px 10px 15px;">
+    <h1 class="inner"><span>{% trans 'Company information' %}</span></h1>
+    <br class="clear" />
+    <div><img src="{% static 'images/about/knuckles.png' %}" width="177" height="117" class="aboutus-img" alt="" /> {% trans 'We are little company that will save your time and give you all what you need in the game! Just pay us and chill!' %} ^w^ <br />
+      <br />
+      <br />
+      {% trans 'We offer you the services of drivers registered in our system. They have passed the moderation check and are allowed to perform their duties. Also, you can purchase in-game items at quite reasonable prices. We save your time, and you use our services.' %}
+      <br />
+      <br />
+      <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div>
+      <h6 class="inner">{% trans 'Our offers' %}</h6>
+      <div> {% trans 'Someday there will be a text here...' %}</div>
+    </div>
+    <div class="clear"></div>
+    <div class="aboutcolumnzone">
+      <div class="aboutcolumn1">
+        <div>
+          <h5>{% trans 'Customer service' %}</h5>
+          <img src="{% static 'images/about/support.png' %}" class="abouticon" alt=""  /> {% trans 'Someday there will be a text here...' %}
+          <div class="insidereadmore"><a href="#">{% trans 'Read More' %}...</a></div>
+        </div>
+      </div>
+      <div class="aboutcolumn2">
+        <div>
+          <h5>{% trans 'Award Winning' %}</h5>
+          <img src="{% static 'images/about/award.png' %}" class="abouticon" alt="" /> {% trans 'Someday there will be a text here...' %}
+          <div class="insidereadmore"><a href="#">{% trans 'Read More' %}...</a></div>
+        </div>
+      </div>
+      <div class="clear"></div>
+      <div class="aboutcolumn1">
+        <div>
+          <h5>{% trans 'Global Reach' %}</h5>
+          <img src="{% static 'images/about/world.png' %}" class="abouticon" alt="" /> {% trans 'Someday there will be a text here...' %}
+          <div class="insidereadmore"><a href="#">{% trans 'Read More' %}...</a></div>
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <div>
+      <h6 class="inner">{% trans 'Our Commitment' %}</h6>
+      <div> {% trans 'Someday there will be a text here...' %} </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

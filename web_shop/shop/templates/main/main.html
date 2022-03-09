@@ -1,0 +1,116 @@
+{% load i18n %}
+{% load static %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>{% block title %}Game Zone{% endblock %}</title>
+  {% block style %}
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css"/>
+  {% endblock %}
+</head>
+<body>
+<div id="wrapper">
+  <div id="header">
+    <div id="headerLeft"></div>
+    <div id="headerMid">
+      <div id="left">
+        <div id="logo"><img src="{% static 'image/main/main_spirits.jpg' %}"  alt=""/>
+        <div id="login">
+        {% if user.is_authenticated %}
+            <p style="color: white">{% trans 'Hello' %} {{ user.username }}! </p>
+            <button class="s_button"><a href="user/{{ user.id }}">{% trans 'Profile' %}</a></button>
+            <button class="s_button"><a href="{% url 'logout' %}">{% trans "Log out"%}</a></button>
+        {% else %}
+            <p>{% trans "Hello anonymous"%}</p>
+            <button class="s_button"> <a href="{% url 'registration' %}">{% trans "Registration" %}</a></button>
+            <button class="s_button"> <a href="{% url 'login' %}">{% trans "Log in"%}</a></button>
+        {% endif %}
+          </div>
+        </div>
+        <div id="mainpiccontainer">
+          <div id="mainPic"> </div>
+        </div>
+      </div>
+      <div id="language">
+            <form action="{% url 'set_language' %}" method="post">
+            {% csrf_token %}
+                <input name="next" type="hidden" value="{{ redirect_to }}">
+                <select name="language">
+                  {{redirect_to}}
+                    {% get_current_language as LANGUAGE_CODE %}
+                    {% get_available_languages as LANGUAGES %}
+                    {% get_language_info_list for LANGUAGES as languages %}
+                    {% for language in languages %}
+                        <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                            {{ language.name_local }} ({{ language.code }})
+                        </option>
+                    {% endfor %}
+                </select>
+                <input type="submit" value="=>">
+            </form>
+        </div>
+      <div id="right">
+        <div id="mainNav">
+          <ul>
+            <li class="first"><a class="current" href="{% url 'main' %}">{% trans 'Home' %}</a><span class="white"> /</span></li>
+            <li><a href="{% url 'about_us' %}">{% trans 'About Us' %}</a><span class="white"> /</span></li>
+            <li><a href="{% url 'goods' %}">{% trans 'Goods' %}</a><span class="white"> /</span></li>
+            <li><a href="{% url 'services' %}">{% trans 'Services' %}</a><span class="white"> /</span></li>
+            <li><a href="{% url 'privacy' %}">{% trans 'Privacy' %}</a><span class="white"> /</span></li>
+            <li><a href="{% url 'contact' %}">{% trans 'Contact Us' %}</a></li>
+          </ul>
+        </div>
+        <div id="productContainer">
+          <div class="productContainer_left">
+            <div class="productContainer_right">
+              <div id="product1">
+                <div align="center"><a href="{% url 'services' %}"><img src="{% static 'images/main/leveling.png' %}" width="132" height="144" alt=""/></a><br />
+                  <span class="greyBold">{% trans 'Level up your characters!' %}</span><br />
+                  <div class="productText"> {% trans 'Are you wanna waste your time in game? Call our drivers, and enjoy your time' %}</div>
+                  </div>
+              </div>
+              <div id="product2">
+                <div align="center"><a href="{% url 'services' %}"><img src="{% static 'images/main/boosting.png' %}" width="132" height="144" alt=""/></a><br />
+                  <span class="greyBold">{% trans 'Boost for your accounts' %}</span>
+                  <div class="productText">{% trans 'Are you need some money or items? Call our drivers and they bring it only for you!' %} </div>
+                </div>
+              </div>
+              <div id="product3">
+                <div align="center"><a href="{% url 'goods' %}"><img src="{% static 'images/main/accounts.png' %}" width="132" height="144" alt=""/></a><br />
+                  <span class="greyBold">{% trans 'ACCOUNTS!' %}</span>
+                  <div class="productText"> {% trans 'Need powerful account with something rare? Look for it here!' %} </div>
+                </div>
+              </div>
+              <div id="product4">
+                <div align="center"><a href="{% url 'goods' %}"><img src="{% static 'images/main/goods.png' %}" width="132" height="144" alt=""/></a><br />
+                  <span class="greyBold">{% trans 'Game items in short time! Look for it here' %}</span>
+                  <div class="productText">{% trans 'Rare items! Powerful artifacts! Yea, it is here!' %}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <div id="headerRight"> </div>
+  </div>
+  {% block content%}
+  {% endblock %}
+  <div class="clear"></div>
+  <div id="bottomBarleft"></div>
+  <div id="bottomBarmid">
+    <div id="bottomMenu">
+      <ul style="color:#666;">
+        Copyright (c) Sitename.com. All rights reserved. Design by Stylish <a href="http://www.stylishtemplate.com">Website Templates</a>.
+      </ul>
+    </div>
+  </div>
+  <div id="bottomBarright"></div>
+  {% block floor %}
+  {% endblock %}
+</div>
+</body>
+</html>

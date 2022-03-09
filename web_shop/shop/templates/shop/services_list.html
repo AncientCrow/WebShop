@@ -1,0 +1,36 @@
+{% extends 'main/main.html' %}
+{% load i18n %}
+{% load static %}
+
+<title>{% block title %}{% trans 'Services'%} {% endblock%}</title>
+{% block content %}
+  {% if services_list %}
+    {% for service in services_list %}
+      <div id="container2">
+        <div style="padding:20px 15px 10px 15px;">
+          <h1 class="inner">{% trans 'Our services' %}</h1>
+          <br class="clear" />
+          <div class="ourprojectrow">
+            <h6 class="inner">{{ service.title }}</h6>
+            <p>{{ service.description }}</p>
+            {% for image in images %}
+              {% if image.service == service.id %}
+                {% if forloop.first %}
+            <div> <img src="{{ image.image.url }}" alt="" width="210" height="139" class="project-img" /> <br />
+              <br />
+              <br />
+              </div>
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+            <div class="clear"></div>
+            <br />
+            <div style="font-weight:bold;"><img src="{% static 'images/other/arrow.png' %}" alt="" width="16" height="16" border="0" /> <a href="#" class="projects">{% trans 'Detail' %}</a>
+              <div class="clear"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endblock %}
