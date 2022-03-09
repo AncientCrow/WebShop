@@ -5,9 +5,10 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>{% block title %}Game Zone{% endblock %}</title>
-  {% block style %}
+
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css"/>
+  {% block style %}
   {% endblock %}
 </head>
 <body>
@@ -17,17 +18,19 @@
     <div id="headerMid">
       <div id="left">
         <div id="logo"><img src="{% static 'image/main/main_spirits.jpg' %}"  alt=""/>
-        <div id="login">
-        {% if user.is_authenticated %}
-            <p style="color: white">{% trans 'Hello' %} {{ user.username }}! </p>
-            <button class="s_button"><a href="user/{{ user.id }}">{% trans 'Profile' %}</a></button>
-            <button class="s_button"><a href="{% url 'logout' %}">{% trans "Log out"%}</a></button>
-        {% else %}
-            <p>{% trans "Hello anonymous"%}</p>
-            <button class="s_button"> <a href="{% url 'registration' %}">{% trans "Registration" %}</a></button>
-            <button class="s_button"> <a href="{% url 'login' %}">{% trans "Log in"%}</a></button>
-        {% endif %}
-          </div>
+          {% block login %}
+          <div id="login">
+          {% if user.is_authenticated %}
+              <p style="color: white">{% trans 'Hello' %} {{ user.username }}! </p>
+              <button class="s_button"><a href="{% url 'user_detail' user.id %}">{% trans 'Profile' %}</a></button>
+              <button class="s_button"><a href="{% url 'logout' %}">{% trans "Log out"%}</a></button>
+          {% else %}
+              <p style="color: white">{% trans "Hello anonymous"%}</p>
+              <button class="s_button"> <a href="{% url 'registration' %}">{% trans "Registration" %}</a></button>
+              <button class="s_button"> <a href="{% url 'login' %}">{% trans "Log in"%}</a></button>
+          {% endif %}
+            </div>
+          {% endblock %}
         </div>
         <div id="mainpiccontainer">
           <div id="mainPic"> </div>
