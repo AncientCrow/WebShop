@@ -19,6 +19,9 @@
                 {% endif %}
             {% endfor %}
         {% endif %}
+        <p>
+            <strong>{% trans 'Author' %}: </strong>{{ object.author }}
+        </p>
     </div>
 
     <div id="rightbar">
@@ -31,7 +34,9 @@
     </div>
 
     <div id="middle">
-
+        <p>
+            <strong>{% trans 'Description' %}: </strong>{{ object.description }}
+        </p>
     </div>
 
 
