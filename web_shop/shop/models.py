@@ -39,7 +39,7 @@ class Goods(models.Model):
     title = models.CharField(max_length=100, verbose_name=_("title"))
     description = models.TextField(max_length=10000, verbose_name=_("description"))
     price = models.PositiveIntegerField(default=0, verbose_name=_("price"))
-    created_at = models.DateField(verbose_name=_("created date"))
+    created_at = models.DateField(verbose_name=_("created date"), editable=False)
 
     status_choices = [
         ("m", "У модерации"),

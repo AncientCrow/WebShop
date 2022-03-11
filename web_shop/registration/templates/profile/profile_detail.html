@@ -83,6 +83,8 @@
     </div>
 
     <div id="middle">
+        <button><a href="{% url 'user_edit' profile.pk %}">{% trans "Edit user info" %}</a></button>
+        <br />
         <p>
             <strong>{% trans "Nickname" %}:</strong> {{ profile.user }}
         </p>

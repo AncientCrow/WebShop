@@ -13,6 +13,7 @@ class Profile(models.Model):
     phone = models.CharField(validators=[phone_regex], max_length=16, unique=True, null=True, verbose_name=_("phone"))
     verify = models.BooleanField(default=False, verbose_name=_("verification"))
     balance = models.PositiveIntegerField(default=0, verbose_name=_("balance"))
+
     class Meta:
         permissions = (
             ("verified", "Верифицирован"),
@@ -22,9 +23,6 @@ class Profile(models.Model):
 
     def get_absolute_url(self):
         return f"/user/{self.id}"
-
-
-
 
 
 class ProfileIcon(models.Model):

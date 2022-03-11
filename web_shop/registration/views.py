@@ -4,6 +4,7 @@ from django.db.models import Max
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
+from django.core.cache import cache
 from django.contrib.auth.views import LogoutView, LoginView
 from django.contrib.auth import authenticate, login
 
@@ -85,10 +86,13 @@ class ProfileDetail(View):
             user_icon = models.ProfileIcon.objects.filter(user_id=user).get()
             form = forms.UpdateIcon
             product_1 = self.get_random_goods()
+            cache.set("product1", self.get_random_goods(), 30 * 60)
             product_2 = self.get_random_goods()
+            cache.set("product2", self.get_random_goods(), 30 * 60)
             product_3 = self.get_random_services()
+            cache.set("product3", self.get_random_services(), 30 * 60)
             product_4 = self.get_random_services()
-
+            cache.set("product4", self.get_random_services(), 30 * 60)
 
             return render(request, "profile/profile_detail.html", {
                 "profile": page_user,
@@ -100,7 +104,7 @@ class ProfileDetail(View):
                 "product4": product_4,
             })
         except Http404:
-            return render(request, "registration/profile_detail.html", {"moderation": True})
+            return render(request, "profile/profile_detail.html", {"moderation": True})
 
     def post(self, request, pk, *args, **kwargs):
         form = forms.UpdateIcon(request.POST, request.FILES)
@@ -118,7 +122,7 @@ class UserEdit(View):
 
     def get(self, request, pk):
         form = forms.UpdateProfile
-        return render(request, "registration/profile_edit.html", {"form": form})
+        return render(request, "profile/profile_edit.html", {"form": form})
 
     def post(self, request, pk):
         form = forms.UpdateProfile(request.POST)

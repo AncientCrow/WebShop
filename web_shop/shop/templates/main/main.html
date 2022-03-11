@@ -1,5 +1,6 @@
 {% load i18n %}
 {% load static %}
+{% load cache %}
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
@@ -16,8 +17,9 @@
   <div id="header">
     <div id="headerLeft"></div>
     <div id="headerMid">
+      {% cache 400 header %}
       <div id="left">
-        <div id="logo"><img src="{% static 'image/main/main_spirits.jpg' %}"  alt=""/>
+        <div id="logo">
           {% block login %}
           <div id="login">
           {% if user.is_authenticated %}
@@ -36,6 +38,7 @@
           <div id="mainPic"> </div>
         </div>
       </div>
+      {% endcache %}
       <div id="language">
             <form action="{% url 'set_language' %}" method="post">
             {% csrf_token %}
@@ -111,17 +114,17 @@
   {% block content%}
   {% endblock %}
   <div class="clear"></div>
+  {% cache 500 floor %}
   <div id="bottomBarleft"></div>
   <div id="bottomBarmid">
     <div id="bottomMenu">
-      <ul style="color:#666;">
-        Copyright (c) Sitename.com. All rights reserved. Design by Stylish <a href="http://www.stylishtemplate.com">Website Templates</a>.
-      </ul>
+      <div style="color:#666;">
+        <p>Copyright (c) Sitename.com. All rights reserved. Design by Stylish <a href="http://www.stylishtemplate.com">Website Templates</a></p>
+      </div>
     </div>
   </div>
   <div id="bottomBarright"></div>
-  {% block floor %}
-  {% endblock %}
+  {% endcache %}
 </div>
 </body>
 </html>
