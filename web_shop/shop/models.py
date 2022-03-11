@@ -1,10 +1,13 @@
+import random
+
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models import Max
 from django.utils.translation import gettext_lazy as _
 
 
 class Service(models.Model):
-    author = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name=_("author"))
+    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=_("author"))
     title = models.CharField(max_length=100, verbose_name=_("title"))
     description = models.TextField(max_length=10000, verbose_name=_("description"))
     price = models.PositiveIntegerField(default=0, verbose_name=_("price"))
@@ -32,11 +35,18 @@ class Service(models.Model):
 
 
 class Goods(models.Model):
-    author = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name=_("author"))
+    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=_("author"))
     title = models.CharField(max_length=100, verbose_name=_("title"))
     description = models.TextField(max_length=10000, verbose_name=_("description"))
     price = models.PositiveIntegerField(default=0, verbose_name=_("price"))
     created_at = models.DateField(verbose_name=_("created date"))
+
+    status_choices = [
+        ("m", "У модерации"),
+        ("a", "Активное"),
+        ("i", "Неактивное"),
+    ]
+    status = models.CharField(max_length=1, choices=status_choices, default="d", verbose_name=_("status"))
 
     class Meta:
         db_table = "goods"
@@ -57,7 +67,7 @@ class GoodsImages(models.Model):
         upload_to="goods/%Y_%m_%d",
         verbose_name=_("image")
     )
-    goods = models.ForeignKey(
+    product = models.ForeignKey(
         Goods,
         on_delete=models.CASCADE,
         related_name="goods_images",
@@ -73,7 +83,7 @@ class ServicesImage(models.Model):
         upload_to="services/%Y_%m_%d",
         verbose_name=_("image")
     )
-    service = models.ForeignKey(
+    product = models.ForeignKey(
         Service,
         on_delete=models.CASCADE,
         related_name="service_images",

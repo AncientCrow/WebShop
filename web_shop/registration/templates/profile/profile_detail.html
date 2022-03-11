@@ -8,9 +8,47 @@
 {% endblock %}
 
 {% block login %}
-
 {% endblock %}
 
+{% block product1 %}
+<div align="center">
+    <a href="{% url 'services' %}">
+        <span class="greyBold">{{ product1.title }}</span>
+    </a>
+    <br />
+    <div class="productText"> {{ product1.short_description }}</div>
+</div>
+{% endblock %}
+
+{% block product2 %}
+<div align="center">
+    <a href="{% url 'services' %}">
+        <span class="greyBold">{{ product2.title }}</span>
+    </a>
+    <br />
+    <div class="productText"> {{ product2.short_description }}</div>
+</div>
+{% endblock %}
+
+{% block product3 %}
+<div align="center">
+    <a href="{% url 'services' %}">
+        <span class="greyBold">{{ product3.title }}</span>
+    </a>
+    <br />
+    <div class="productText"> {{ product3.short_description }}</div>
+</div>
+{% endblock %}
+
+{% block product4 %}
+<div align="center">
+    <a href="{% url 'services' %}">
+        <span class="greyBold">{{ product4.title }}</span>
+    </a>
+    <br />
+    <div class="productText">{{ product4.short_description }}</div>
+</div>
+{% endblock %}
 {% block content %}
     <div id="leftbar">
         {% if icon %}
