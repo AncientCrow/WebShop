@@ -69,28 +69,36 @@
           <div class="productContainer_left">
             <div class="productContainer_right">
               <div id="product1">
+                {% block product1 %}
                 <div align="center"><a href="{% url 'services' %}"><img src="{% static 'images/main/leveling.png' %}" width="132" height="144" alt=""/></a><br />
                   <span class="greyBold">{% trans 'Level up your characters!' %}</span><br />
                   <div class="productText"> {% trans 'Are you wanna waste your time in game? Call our drivers, and enjoy your time' %}</div>
-                  </div>
+                </div>
+                {% endblock %}
               </div>
               <div id="product2">
+                {% block product2 %}
                 <div align="center"><a href="{% url 'services' %}"><img src="{% static 'images/main/boosting.png' %}" width="132" height="144" alt=""/></a><br />
                   <span class="greyBold">{% trans 'Boost for your accounts' %}</span>
                   <div class="productText">{% trans 'Are you need some money or items? Call our drivers and they bring it only for you!' %} </div>
                 </div>
+                {% endblock %}
               </div>
               <div id="product3">
+                {% block product3 %}
                 <div align="center"><a href="{% url 'goods' %}"><img src="{% static 'images/main/accounts.png' %}" width="132" height="144" alt=""/></a><br />
                   <span class="greyBold">{% trans 'ACCOUNTS!' %}</span>
                   <div class="productText"> {% trans 'Need powerful account with something rare? Look for it here!' %} </div>
                 </div>
+                {% endblock %}
               </div>
               <div id="product4">
+                {% block product4 %}
                 <div align="center"><a href="{% url 'goods' %}"><img src="{% static 'images/main/goods.png' %}" width="132" height="144" alt=""/></a><br />
                   <span class="greyBold">{% trans 'Game items in short time! Look for it here' %}</span>
                   <div class="productText">{% trans 'Rare items! Powerful artifacts! Yea, it is here!' %}</div>
                 </div>
+                {% endblock %}
               </div>
             </div>
           </div>

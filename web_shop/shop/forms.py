@@ -15,7 +15,7 @@ class GoodsForm(forms.ModelForm):
 class GoodsImageForm(forms.ModelForm):
     images = forms.FileField(
         widget=forms.ClearableFileInput(
-            attrs={'multiple': True}),
+            attrs={'multiple': False}),
         required=True,
         label=_("Images to upload"),
     )

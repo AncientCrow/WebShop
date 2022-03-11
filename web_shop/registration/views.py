@@ -1,9 +1,14 @@
+import random
+
+from django.db.models import Max
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 from django.contrib.auth.views import LogoutView, LoginView
 from django.contrib.auth import authenticate, login
+
 from . import forms, models
+from shop import models as shop_models
 
 
 class RegistrationPage(View):
@@ -55,16 +60,44 @@ class RegistrationPage(View):
 
 class ProfileDetail(View):
 
+    @staticmethod
+    def get_random_goods():
+        max_id = shop_models.Goods.objects.all().aggregate(max_id=Max("id"))['max_id']
+        while True:
+            pk = random.randint(1, max_id)
+            goods = shop_models.Goods.objects.filter(pk=pk).first()
+            if goods:
+                return goods
+
+    @staticmethod
+    def get_random_services():
+        max_id = shop_models.Service.objects.all().aggregate(max_id=Max("id"))['max_id']
+        while True:
+            pk = random.randint(1, max_id)
+            goods = shop_models.Service.objects.filter(pk=pk).first()
+            if goods:
+                return goods
+
     def get(self, request, pk):
         try:
             user = request.user.id
             page_user = get_object_or_404(models.Profile, user_id=user)
             user_icon = models.ProfileIcon.objects.filter(user_id=user).get()
             form = forms.UpdateIcon
+            product_1 = self.get_random_goods()
+            product_2 = self.get_random_goods()
+            product_3 = self.get_random_services()
+            product_4 = self.get_random_services()
+
+
             return render(request, "profile/profile_detail.html", {
                 "profile": page_user,
                 "icon": user_icon,
-                "form": form
+                "form": form,
+                "product1": product_1,
+                "product2": product_2,
+                "product3": product_3,
+                "product4": product_4,
             })
         except Http404:
             return render(request, "registration/profile_detail.html", {"moderation": True})

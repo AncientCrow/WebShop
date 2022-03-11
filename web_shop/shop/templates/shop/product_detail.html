@@ -1,0 +1,41 @@
+{% extends 'main/main.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block style %}
+<link href="{% static 'css/profile.css' %}" rel="stylesheet" type="text/css"/>
+<link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block login %}
+{% endblock %}
+{% block content %}
+
+    <div id="leftbar">
+        {% if files %}
+            {% for file in files %}
+                {% if file.product_id == object.id %}
+            <img src="{{ file.image.url }}" width="100px">
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <div id="rightbar">
+        <p>
+            <strong>{% trans 'Price' %}: </strong>{{ object.price }}
+        </p>
+        <p>
+            <strong>{% trans 'Created at' %}: </strong>{{ object.created_at }}
+        </p>
+    </div>
+
+    <div id="middle">
+
+    </div>
+
+
+    <div id="clear">
+    </div>
+
+{% endblock %}
