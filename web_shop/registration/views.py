@@ -85,14 +85,10 @@ class ProfileDetail(View):
             page_user = get_object_or_404(models.Profile, user_id=user)
             user_icon = models.ProfileIcon.objects.filter(user_id=user).get()
             form = forms.UpdateIcon
-            product_1 = self.get_random_goods()
-            cache.set("product1", self.get_random_goods(), 30 * 60)
-            product_2 = self.get_random_goods()
-            cache.set("product2", self.get_random_goods(), 30 * 60)
-            product_3 = self.get_random_services()
-            cache.set("product3", self.get_random_services(), 30 * 60)
-            product_4 = self.get_random_services()
-            cache.set("product4", self.get_random_services(), 30 * 60)
+            product_1 = cache.get_or_set("product1", self.get_random_goods(), 30 * 60)
+            product_2 = cache.get_or_set("product2", self.get_random_goods(), 30 * 60)
+            product_3 = cache.get_or_set("product3", self.get_random_services(), 30 * 60)
+            product_4 = cache.get_or_set("product4", self.get_random_services(), 30 * 60)
 
             return render(request, "profile/profile_detail.html", {
                 "profile": page_user,
@@ -152,6 +148,7 @@ class LoginPage(LoginView):
 
 
 class Logout(LogoutView):
+
     """
     Класс отвечающий за отображения страницы выхода из системы
     работает на внутренней структуре Джанго
