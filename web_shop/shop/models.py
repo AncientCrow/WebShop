@@ -1,8 +1,7 @@
-import random
-
+from datetime import datetime
+from django.utils.timezone import now
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models import Max
 from django.utils.translation import gettext_lazy as _
 
 
@@ -11,7 +10,7 @@ class Service(models.Model):
     title = models.CharField(max_length=100, verbose_name=_("title"))
     description = models.TextField(max_length=10000, verbose_name=_("description"))
     price = models.PositiveIntegerField(default=0, verbose_name=_("price"))
-    created_at = models.DateField(editable=False, verbose_name=_("created date"))
+    created_at = models.DateField(editable=False, verbose_name=_("created date"), default=now())
 
     status_choices = [
         ("m", "У модерации"),
@@ -39,7 +38,7 @@ class Goods(models.Model):
     title = models.CharField(max_length=100, verbose_name=_("title"))
     description = models.TextField(max_length=10000, verbose_name=_("description"))
     price = models.PositiveIntegerField(default=0, verbose_name=_("price"))
-    created_at = models.DateField(verbose_name=_("created date"), editable=False)
+    created_at = models.DateField(verbose_name=_("created date"), editable=False, default=now())
 
     status_choices = [
         ("m", "У модерации"),

@@ -1,5 +1,7 @@
 import random
 
+from rest_framework.mixins import ListModelMixin, CreateModelMixin
+from rest_framework.generics import GenericAPIView
 from django.db.models import Max
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404, redirect
@@ -7,22 +9,15 @@ from django.views import View
 from django.core.cache import cache
 from django.contrib.auth.views import LogoutView, LoginView
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
 
-from . import forms, models
+from . import forms, models, serializers
 from shop import models as shop_models
 
 
 class RegistrationPage(View):
     """
     Класс отвечающий за отображение страницы с регистрацией нового пользователя
-
-    Methods:
-    ________
-    get - принимает get запрос и выдает шаблон registration.html с формой регистрации
-    ( из forms.RegistrationForm в шаблоне используется как {{ form }} )
-    post - принимает post запрос c данными о пользователе, которые были в форме регистрации
-    Создается объект registration в виде форме с заполненными данными (благодаря request.POST)
-    Если is_valid == True, то данные сохраняются в бд
     """
 
     def get(self, request):
@@ -60,6 +55,10 @@ class RegistrationPage(View):
 
 
 class ProfileDetail(View):
+    """
+    Отображение детальной информации о профиле, с выводом случайных товаров как рекомендуемых.
+    Рекомендуемые товары сохраняются в cache памяти. Имеется возможность обновления изображения профиля
+    """
 
     @staticmethod
     def get_random_goods():
@@ -115,7 +114,9 @@ class ProfileDetail(View):
 
 
 class UserEdit(View):
-
+    """
+    Страница для редактирования профиля
+    """
     def get(self, request, pk):
         form = forms.UpdateProfile
         return render(request, "profile/profile_edit.html", {"form": form})
@@ -148,8 +149,39 @@ class LoginPage(LoginView):
 
 
 class Logout(LogoutView):
-
     """
     Класс отвечающий за отображения страницы выхода из системы
     работает на внутренней структуре Джанго
     """
+
+
+class UserListAPI(ListModelMixin, CreateModelMixin, GenericAPIView):
+    """
+    API с выводом информации о пользователях модели User,
+    дополнительно выводится информация из модели Profile
+    """
+    queryset = User.objects.all()
+    serializer_class = serializers.UserSerializer
+
+    def get_queryset(self):
+        queryset = models.User.objects.all()
+        first_name = self.request.query_params.get("name")
+
+        if first_name:
+            queryset = queryset.filter(first_name=first_name)
+
+        return queryset
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+
+class ProfileListApi(ListModelMixin, CreateModelMixin, GenericAPIView):
+    """
+    API с выводом информации о пользователях модели Profile
+    """
+    queryset = models.Profile.objects.all()
+    serializer_class = serializers.ProfileSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
