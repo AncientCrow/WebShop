@@ -4,9 +4,11 @@ from django.views.generic import DetailView
 
 from rest_framework.mixins import ListModelMixin, CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, \
     DestroyModelMixin
-from rest_framework.generics import GenericAPIView
+from rest_framework.generics import GenericAPIView, ListAPIView
 
-from . import models, serializers
+from django_filters.rest_framework import DjangoFilterBackend
+
+from . import models, serializers, filters
 
 
 class MainPage(View):
@@ -95,7 +97,7 @@ class About(View):
         return render(request, "shop/about_us.html")
 
 
-class GoodsAPIView(ListModelMixin, CreateModelMixin, GenericAPIView):
+class GoodsAPIView(ListAPIView):
     """
     API страница со списком товаров, имеется фильтрация по названию товара,
     автору, цене (включая сортирову по убыванию/возрастанию)
@@ -103,34 +105,8 @@ class GoodsAPIView(ListModelMixin, CreateModelMixin, GenericAPIView):
 
     queryset = models.Goods.objects.all()
     serializer_class = serializers.GoodsSerializer
-
-    def get_queryset(self):
-        queryset = models.Goods.objects.all()
-        goods_author = self.request.query_params.get("author")
-        goods_title = self.request.query_params.get("title")
-        goods_price = self.request.query_params.get("price")
-
-        if goods_author:
-            queryset = queryset.filter(author=goods_author)
-        elif goods_title:
-            queryset = queryset.filter(title=goods_title)
-        elif goods_price:
-            if goods_price == "up":
-                queryset = queryset.filter().order_by("price")
-            elif goods_price == "down":
-                queryset = queryset.filter().order_by("-price")
-                try:
-                    queryset = queryset.filter(price=goods_price)
-                except ValueError:
-                    queryset = queryset.filter().order_by("price")
-
-        return queryset
-
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
-
-    def post(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)
+    filter_backends = (DjangoFilterBackend,)
+    filterset_class = filters.GoodsFilter
 
 
 class DetailGoodsAPIView(RetrieveModelMixin,
@@ -175,39 +151,12 @@ class DetailServiceAPIView(RetrieveModelMixin,
         return self.destroy(request, *args, **kwargs)
 
 
-class ServicesAPIView(ListModelMixin, CreateModelMixin, GenericAPIView):
+class ServicesAPIView(ListAPIView):
     """
     API страница со списком услуг, имеется фильтрация по названию услуги,
     автору, цене (включая сортирову по убыванию/возрастанию)
     """
     queryset = models.Service.objects.all()
     serializer_class = serializers.ServicesSerializer
-
-    def get_queryset(self):
-        queryset = models.Service.objects.all()
-        service_author = self.request.query_params.get("author")
-        service_title = self.request.query_params.get("title")
-        service_price = self.request.query_params.get("price")
-
-        if service_author:
-            queryset = queryset.filter(author=service_author)
-        elif service_title:
-            queryset = queryset.filter(title=service_title)
-        elif service_price:
-            if service_price == "up":
-                queryset = queryset.filter().order_by("price")
-            elif service_price == "down":
-                queryset = queryset.filter().order_by("-price")
-            else:
-                try:
-                    queryset = queryset.filter(price=service_price)
-                except ValueError:
-                    queryset = queryset.filter().order_by("price")
-
-        return queryset
-
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
-
-    def post(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)
+    filter_backends = (DjangoFilterBackend,)
+    filterset_class = filters.ServicesFilter

@@ -1,7 +1,6 @@
 import random
 
-from rest_framework.mixins import ListModelMixin, CreateModelMixin
-from rest_framework.generics import GenericAPIView
+from rest_framework.generics import ListAPIView
 from django.db.models import Max
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404, redirect
@@ -10,8 +9,9 @@ from django.core.cache import cache
 from django.contrib.auth.views import LogoutView, LoginView
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
+from django_filters.rest_framework import DjangoFilterBackend
 
-from . import forms, models, serializers
+from . import forms, models, serializers, filters
 from shop import models as shop_models
 
 
@@ -155,33 +155,24 @@ class Logout(LogoutView):
     """
 
 
-class UserListAPI(ListModelMixin, CreateModelMixin, GenericAPIView):
+class UserListAPI(ListAPIView):
     """
     API с выводом информации о пользователях модели User,
     дополнительно выводится информация из модели Profile
     """
     queryset = User.objects.all()
     serializer_class = serializers.UserSerializer
-
-    def get_queryset(self):
-        queryset = models.User.objects.all()
-        first_name = self.request.query_params.get("name")
-
-        if first_name:
-            queryset = queryset.filter(first_name=first_name)
-
-        return queryset
-
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
+    filter_backends = (DjangoFilterBackend,)
+    filterset_class = filters.UsersFilter
 
 
-class ProfileListApi(ListModelMixin, CreateModelMixin, GenericAPIView):
+
+class ProfileListApi(ListAPIView):
     """
     API с выводом информации о пользователях модели Profile
     """
     queryset = models.Profile.objects.all()
     serializer_class = serializers.ProfileSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filterset_class = filters.ProfileFilter
 
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
