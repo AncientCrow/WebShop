@@ -19,8 +19,10 @@ from . import yasg
 
 
 urlpatterns = [
+    path("admin/doc/", include("django.contrib.admindocs.urls")),
     path('admin/', admin.site.urls),
     path("", include("shop.urls")),
     path("", include("registration.urls")),
+
 ] + yasg.urlpatterns
 

@@ -5,6 +5,20 @@ from django.core.validators import RegexValidator
 
 
 class Profile(models.Model):
+    """
+    Модель содержащая информацию о пользователе
+
+    Attributes
+    -----------
+        * user - внешний ключ связанный с внутренней моделью User
+        * city - текстовое(символьное) поле с информацией о городе пользователя
+        * about - текстовое поле с информацией о пользователе
+        * date - поле с календарной датой рождения пользователя
+        * phone_regex - регулярное выражение для обработки номеров телефона
+        * phone - текстовое(символьное) поле для номера телефона пользователя
+        * balance - числовое поле для указания баланса пользователя
+    """
+
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=_("user"), related_name="user_id")
     city = models.CharField(max_length=36, null=True, verbose_name=_("city"))
     about = models.TextField(max_length=10000, null=True, verbose_name=_("about"))
@@ -30,6 +44,15 @@ class Profile(models.Model):
         return '%s: %d' % (self.phone, self.balance)
 
 class ProfileIcon(models.Model):
+    """
+    Модель содержащая информацию о изображении профиля
+
+    Attributes
+    -----------
+        * icon - поле содержащее изображения профиля
+        * user - внешний ключ связанный с внутренней моделью User
+
+    """
     icon = models.ImageField(upload_to="users/%Y_%m_%d")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 

@@ -109,6 +109,10 @@ msgstr "телефон"
 msgid "verification"
 msgstr "верификация"
 
+#: .\registration\models.py:14
+msgid "balance"
+msgstr "баланс"
+
 #: .\registration\models.py:20
 msgid "profile"
 msgstr "профиль"

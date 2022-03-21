@@ -58,6 +58,11 @@ class ProfileDetail(View):
     """
     Отображение детальной информации о профиле, с выводом случайных товаров как рекомендуемых.
     Рекомендуемые товары сохраняются в cache памяти. Имеется возможность обновления изображения профиля
+
+    Methods
+    ---------
+        * get_random_goods() - метод, возвращающий случайно выбранный товар из БД
+        * get_random_services() - метод, возвращающий случайно выбранную услугу из БД
     """
 
     @staticmethod
@@ -142,6 +147,11 @@ class LoginPage(LoginView):
     """
     Класс отвечающий за отображение страницы входа в систему,
     принимает шаблон и форму логина
+
+    Attributes
+    -----------
+        * template_name - название используемого шаблона
+        * authentication_form - форма для аутентификации пользователя
     """
 
     template_name = "registration/login.html"
@@ -159,7 +169,15 @@ class UserListAPI(ListAPIView):
     """
     API с выводом информации о пользователях модели User,
     дополнительно выводится информация из модели Profile
+
+    Attributes
+    -----------
+        * queryset - queryset содержащие все данные модели из БД
+        * serializer_class - serializer для преобразования данных (в данном случае касательно пользователя)
+        * filter_backends - выбор backend для фильтра API отображения
+        * filterset_class - фильтр для списка пользователей
     """
+
     queryset = User.objects.all()
     serializer_class = serializers.UserSerializer
     filter_backends = (DjangoFilterBackend,)
@@ -170,7 +188,15 @@ class UserListAPI(ListAPIView):
 class ProfileListApi(ListAPIView):
     """
     API с выводом информации о пользователях модели Profile
+
+    Attributes
+    -----------
+        * queryset - queryset содержащие все данные модели из БД
+        * serializer_class - serializer для преобразования данных (в данном случае касательно профиля пользователя)
+        * filter_backends - выбор backend для фильтра API отображения
+        * filterset_class - фильтр для списка пользователей
     """
+
     queryset = models.Profile.objects.all()
     serializer_class = serializers.ProfileSerializer
     filter_backends = (DjangoFilterBackend,)

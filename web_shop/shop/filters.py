@@ -4,6 +4,9 @@ from . import models
 
 
 class GoodsFilter(filters.FilterSet):
+    """
+    Реализация фильтра для списка товаров с помощью django-filter
+    """
 
     class Meta:
         model = models.Goods
@@ -15,6 +18,9 @@ class GoodsFilter(filters.FilterSet):
 
 
 class ServicesFilter(filters.FilterSet):
+    """
+    Реализация фильтра для списка услуг с помощью django-filter
+    """
 
     class Meta:
         model = models.Service
