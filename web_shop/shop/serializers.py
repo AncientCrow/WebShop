@@ -11,19 +11,19 @@ class GoodsSerializer(serializers.Serializer):
 
     def create(self, validated_data):
         """
-        Create and return a new `Snippet` instance, given the validated data.
+        Создает и возвращает новый экземпляр 'Goods' с учетом проверки данных.
         """
         return models.Goods.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
         """
-        Update and return an existing `Snippet` instance, given the validated data.
+        Обновляет и сохраняет значение экземпляра 'Goods', с учетом проверки данных
         """
+        instance.author_id = validated_data.get('author_id', instance.author_id)
         instance.title = validated_data.get('title', instance.title)
-        instance.code = validated_data.get('code', instance.code)
-        instance.linenos = validated_data.get('linenos', instance.linenos)
-        instance.language = validated_data.get('language', instance.language)
-        instance.style = validated_data.get('style', instance.style)
+        instance.description = validated_data.get('description', instance.description)
+        instance.price = validated_data.get('price', instance.price)
+        instance.created_at = validated_data.get('created_at', instance.created_at)
         instance.save()
         return instance
 
@@ -37,18 +37,18 @@ class ServicesSerializer(serializers.Serializer):
 
     def create(self, validated_data):
         """
-        Create and return a new `Snippet` instance, given the validated data.
+        Создает и возвращает новый экземпляр`Service` с учетом проверенных данных.
         """
         return models.Service.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
         """
-        Update and return an existing `Snippet` instance, given the validated data.
+        Обновляет и сохраняет значение экземпляра 'Service', с учетом проверки данных
         """
+        instance.author_id = validated_data.get('author_id', instance.author_id)
         instance.title = validated_data.get('title', instance.title)
-        instance.code = validated_data.get('code', instance.code)
-        instance.linenos = validated_data.get('linenos', instance.linenos)
-        instance.language = validated_data.get('language', instance.language)
-        instance.style = validated_data.get('style', instance.style)
+        instance.description = validated_data.get('description', instance.description)
+        instance.price = validated_data.get('price', instance.price)
+        instance.created_at = validated_data.get('created_at', instance.created_at)
         instance.save()
         return instance

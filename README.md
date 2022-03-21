@@ -28,16 +28,16 @@ ____
 ## How it looks?
 ____
 # Main page
-![](https://github.com/AncientCrow/WebShop/blob/master/for_readme/main_page.PNG)
+![](./for_readme/main_page.PNG)
 # Goods list
-![](https://github.com/AncientCrow/WebShop/blob/master/for_readme/goods_list.PNG)
+![](./for_readme/goods_list.PNG)
 # Services list
-![](https://github.com/AncientCrow/WebShop/blob/master/for_readme/services_list.PNG)
+![](./for_readme/services_list.PNG)
 # Goods detail
-![](https://github.com/AncientCrow/WebShop/blob/master/for_readme/goods_detail.PNG)
+![](./for_readme/goods_detail.PNG)
 # Service detail
-![](https://github.com/AncientCrow/WebShop/blob/master/for_readme/service_detail.PNG)
+![](./for_readme/service_detail.PNG)
 # About us
-![](https://github.com/AncientCrow/WebShop/blob/master/for_readme/about.PNG)
+![](./for_readme/about.PNG)
 # Privacy
-![](https://github.com/AncientCrow/WebShop/blob/master/for_readme/privacy.PNG)
+![](./for_readme/privacy.PNG)

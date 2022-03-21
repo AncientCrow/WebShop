@@ -10,6 +10,19 @@ class UserAdmin(admin.ModelAdmin):
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
+    """
+    Регистрация модели Profile в админ-панели
+
+    Attributes
+    -----------
+        * list_display - столбцы отображаемые в админ-панели
+        * actions - доступные действия
+
+    Methods
+    ----------
+        * add_verify_permission() - верификация пользователя сменой Boolean значения verify на True
+    """
+
     list_display = ('user', "verify")
     actions = ["add_verify_permission"]
 
