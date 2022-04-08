@@ -82,7 +82,7 @@ class ServicesListTest(TestCase):
     def test_view_use_valid_template(self):
         response = self.client.get(reverse("services"))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "shop/service_list.html")
+        self.assertTemplateUsed(response, "shop/product_list.html")
 
 
 class ServicesDetailTest(TestCase):

@@ -7,12 +7,9 @@
 <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css"/>
 {% endblock %}
 
-{% block login %}
-{% endblock %}
-
 {% block product1 %}
 <div align="center">
-    <a href="{% url 'services' %}">
+    <a href="{% url 'product_detail' product1.id %}">
         <span class="greyBold">{{ product1.title }}</span>
     </a>
     <br />
@@ -22,7 +19,7 @@
 
 {% block product2 %}
 <div align="center">
-    <a href="{% url 'services' %}">
+    <a href="{% url 'product_detail' product2.id %}">
         <span class="greyBold">{{ product2.title }}</span>
     </a>
     <br />
@@ -32,7 +29,7 @@
 
 {% block product3 %}
 <div align="center">
-    <a href="{% url 'services' %}">
+    <a href="{% url 'product_detail' product3.id %}">
         <span class="greyBold">{{ product3.title }}</span>
     </a>
     <br />
@@ -42,34 +39,21 @@
 
 {% block product4 %}
 <div align="center">
-    <a href="{% url 'services' %}">
+    <a href="{% url 'product_detail' product4.id %}">
         <span class="greyBold">{{ product4.title }}</span>
     </a>
     <br />
     <div class="productText">{{ product4.short_description }}</div>
 </div>
 {% endblock %}
+
 {% block content %}
     <div id="leftbar">
-        {% if icon %}
-            <img src="{{ icon.icon.url }}" width="100px">
+        {% if profile.icon %}
+            <img src="{{ profile.icon.url }}" width="100px">
         {% endif %}
-        {% if user.is_staff == False %}
-            <form method="post" class="to-be-changed" enctype="multipart/form-data">
-                {% csrf_token %}
-                <table>
-                        {% for field in form %}
-                        <tr>
-                            <td>{{ field.label }}</td>
-                        </tr>
-                        <tr>
-                            <td>{{ field }}</td>
-                        </tr>
-                        {% endfor %}
-                    </table>
-                <input type="submit" value="{% trans 'Confirm' %}" >
-            </form>
     </div>
+    {% if user.is_staff == False %}
 
     <div id="rightbar">
         <p>
@@ -80,6 +64,22 @@
                 {{ profile.about }}
             {% endif %}
         </p>
+        <p>
+            <strong>{% trans 'Balance' %}:</strong>
+            {{ profile.balance }}
+        </p>
+        <form method="post" action="" class="login" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for field in balance_form %}
+            <p>
+                <label for="id_{{field.name}}">{{ field.label }}</label>
+                {{ field }}
+            </p>
+        {% endfor %}
+          <p class="reg-submit">
+            <button type="submit" class="login-button">{% trans 'Pay balance' %}</button>
+          </p>
+        </form>
     </div>
 
     <div id="middle">
@@ -96,6 +96,9 @@
         </p>
         <p>
             <strong>{% trans "Birthday" %}:</strong> {{ profile.date }}
+        </p>
+        <p>
+            <strong>{% trans "Goods publiched" %}:</strong> {{ goods }}
         </p>
     </div>
 

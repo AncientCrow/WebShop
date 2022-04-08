@@ -20,13 +20,16 @@ class Profile(models.Model):
     """
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=_("user"), related_name="user_id")
-    city = models.CharField(max_length=36, null=True, verbose_name=_("city"))
-    about = models.TextField(max_length=10000, null=True, verbose_name=_("about"))
-    date = models.DateField(verbose_name=_("date"))
-    phone_regex = RegexValidator(regex=r"^\+?1?\d{8,15}$")
-    phone = models.CharField(validators=[phone_regex], max_length=16, unique=True, null=True, verbose_name=_("phone"))
     verify = models.BooleanField(default=False, verbose_name=_("verification"))
     balance = models.IntegerField(default=0, verbose_name=_("balance"))
+    icon = models.ImageField(upload_to="users/%Y_%m_%d", null=True)
+    used_balance = models.IntegerField(default=0, verbose_name=_("balance"))
+    status_choices = [
+        ("C", "Обычный"),
+        ("A", "Продвинутый"),
+        ("V", "VIP"),
+    ]
+    status = models.CharField(max_length=1, choices=status_choices, default="C", verbose_name=_("status"))
 
     class Meta:
         permissions = (
@@ -37,24 +40,29 @@ class Profile(models.Model):
         unique_together = ["user", "id"]
         ordering = ["id"]
 
+    def __str__(self):
+        return self.user.username
+
     def get_absolute_url(self):
         return f"/user/{self.id}"
 
-    def __str__(self):
-        return '%s: %d' % (self.phone, self.balance)
+    def check_status(self):
+        if 1000 < self.used_balance < 10000:
+            self.status = "C"
+        elif 10000 < self.used_balance < 20000:
+            self.status = "A"
+        elif self.used_balance > 20000:
+            self.status = "V"
 
-class ProfileIcon(models.Model):
-    """
-    Модель содержащая информацию о изображении профиля
-
-    Attributes
-    -----------
-        * icon - поле содержащее изображения профиля
-        * user - внешний ключ связанный с внутренней моделью User
-
-    """
-    icon = models.ImageField(upload_to="users/%Y_%m_%d")
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    class Meta:
-        db_table = "user_icon"
+    def update_balance(self, balance):
+        print(balance)
+        if self.balance >= balance:
+            print(1, self.balance, balance)
+            self.balance -= balance
+            self.used_balance += balance
+            self.check_status()
+            self.save()
+            return True
+        elif self.balance <= balance:
+            print(2, self.balance, balance)
+            return False

@@ -6,7 +6,7 @@ from . import models
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Profile
-        fields = ["user", "city", "phone", "date"]
+        fields = ["user", "balance"]
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):

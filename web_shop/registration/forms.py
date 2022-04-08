@@ -35,18 +35,10 @@ class RegistrationForm(UserCreationForm):
     password1 = forms.CharField(label=_("Password"), widget=forms.PasswordInput)
     password2 = forms.CharField(label=_("Password confirm"), widget=forms.PasswordInput)
     email = forms.EmailField(label=_("Email"), required=False)
-    start_year = datetime.date.today().year - 120
-    end_year = datetime.date.today().year
-    date = forms.DateField(
-        label=_("Birthday"),
-        widget=forms.SelectDateWidget(years=range(start_year, end_year)),
-    )
-    phone = forms.CharField(label=_("Phone number"), max_length=16, required=False)
-    city = forms.CharField(label=_("Your city"), required=False)
 
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email', 'date']
+        fields = ['username', 'first_name', 'last_name', 'email']
 
 
 class LoginForm(AuthenticationForm):
@@ -82,14 +74,8 @@ class UpdateProfile(forms.Form):
     first_name = forms.CharField(label=_("First name"), max_length=25)
     last_name = forms.CharField(label=_("Last name"), max_length=30)
     about = forms.CharField(label=_("About"), max_length=10000, widget=forms.Textarea())
+    icon = forms.ImageField(label=_("Icon"), widget=forms.FileInput(attrs={'class': 'form-control-file'}))
 
 
-class UpdateIcon(forms.Form):
-    """
-    Форма для обновления изображения профиля
-
-    Attributes
-    -----------
-        * icon - поле для добавления файла изображения
-    """
-    icon = forms.ImageField(label=_("Image"))
+class UpdateBalance(forms.Form):
+    balance = forms.IntegerField(label=_("Balance"))
