@@ -17,7 +17,6 @@
   <div id="header">
     <div id="headerLeft"></div>
     <div id="headerMid">
-      {% cache 400 header %}
       <div id="left">
         <div id="logo">
           {% block login %}
@@ -38,7 +37,6 @@
           <div id="mainPic"> </div>
         </div>
       </div>
-      {% endcache %}
       <div id="language">
             <form action="{% url 'set_language' %}" method="post">
             {% csrf_token %}
@@ -60,12 +58,12 @@
       <div id="right">
         <div id="mainNav">
           <ul>
-            <li class="first"><a class="current" href="{% url 'main' %}">{% trans 'Home' %}</a><span class="white"> /</span></li>
-            <li><a href="{% url 'about_us' %}">{% trans 'About Us' %}</a><span class="white"> /</span></li>
-            <li><a href="{% url 'goods' %}">{% trans 'Goods' %}</a><span class="white"> /</span></li>
-            <li><a href="{% url 'services' %}">{% trans 'Services' %}</a><span class="white"> /</span></li>
-            <li><a href="{% url 'privacy' %}">{% trans 'Privacy' %}</a><span class="white"> /</span></li>
-            <li><a href="{% url 'contact' %}">{% trans 'Contact Us' %}</a></li>
+            <li class="first"><a href="{% url 'main' %}">{% trans 'Home' %}</a><span class="white"> /</span></li>
+            <li><a href="{% url 'about_us' %}">{% trans 'About Us' %}</a><span class="white">/</span></li>
+            <li><a href="{% url 'products' %}">{% trans 'Products' %}</a><span class="white">/</span></li>
+            <li><a href="{% url 'privacy' %}">{% trans 'Privacy' %}</a><span class="white">/</span></li>
+            <li><a href="{% url 'contact' %}">{% trans 'Contact Us' %}</a><span class="white">/</span></li>
+            <li><a href="{% url 'cart:cart_detail' %}">{% trans 'Cart' %}</a></li>
           </ul>
         </div>
         <div id="productContainer">
@@ -73,7 +71,7 @@
             <div class="productContainer_right">
               <div id="product1">
                 {% block product1 %}
-                <div align="center"><a href="{% url 'services' %}"><img src="{% static 'images/main/leveling.png' %}" width="132" height="144" alt=""/></a><br />
+                <div align="center"><a href="{% url 'products' %}"><img src="{% static 'images/main/leveling.png' %}" width="132" height="144" alt=""/></a><br />
                   <span class="greyBold">{% trans 'Level up your characters!' %}</span><br />
                   <div class="productText"> {% trans 'Are you wanna waste your time in game? Call our drivers, and enjoy your time' %}</div>
                 </div>
@@ -81,7 +79,7 @@
               </div>
               <div id="product2">
                 {% block product2 %}
-                <div align="center"><a href="{% url 'services' %}"><img src="{% static 'images/main/boosting.png' %}" width="132" height="144" alt=""/></a><br />
+                <div align="center"><a href="{% url 'products' %}"><img src="{% static 'images/main/boosting.png' %}" width="132" height="144" alt=""/></a><br />
                   <span class="greyBold">{% trans 'Boost for your accounts' %}</span>
                   <div class="productText">{% trans 'Are you need some money or items? Call our drivers and they bring it only for you!' %} </div>
                 </div>
@@ -89,7 +87,7 @@
               </div>
               <div id="product3">
                 {% block product3 %}
-                <div align="center"><a href="{% url 'goods' %}"><img src="{% static 'images/main/accounts.png' %}" width="132" height="144" alt=""/></a><br />
+                <div align="center"><a href="{% url 'products' %}"><img src="{% static 'images/main/accounts.png' %}" width="132" height="144" alt=""/></a><br />
                   <span class="greyBold">{% trans 'ACCOUNTS!' %}</span>
                   <div class="productText"> {% trans 'Need powerful account with something rare? Look for it here!' %} </div>
                 </div>
@@ -97,7 +95,7 @@
               </div>
               <div id="product4">
                 {% block product4 %}
-                <div align="center"><a href="{% url 'goods' %}"><img src="{% static 'images/main/goods.png' %}" width="132" height="144" alt=""/></a><br />
+                <div align="center"><a href="{% url 'products' %}"><img src="{% static 'images/main/goods.png' %}" width="132" height="144" alt=""/></a><br />
                   <span class="greyBold">{% trans 'Game items in short time! Look for it here' %}</span>
                   <div class="productText">{% trans 'Rare items! Powerful artifacts! Yea, it is here!' %}</div>
                 </div>

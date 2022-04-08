@@ -1,7 +1,8 @@
 import random
 
+from django.db import transaction
 from rest_framework.generics import ListAPIView
-from django.db.models import Max
+from django.db.models import Max, Count
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
@@ -13,6 +14,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 from . import forms, models, serializers, filters
 from shop import models as shop_models
+from registration import models as user_models
 
 
 class RegistrationPage(View):
@@ -29,18 +31,10 @@ class RegistrationPage(View):
         file = request.FILES.get("profile_icon")
         if form.is_valid():
             user = form.save()
-            date = form.cleaned_data.get('date')
-            city = form.cleaned_data.get('city')
-
-            models.ProfileIcon.objects.create(
-                user=user,
-                icon=file,
-            )
 
             models.Profile.objects.create(
                 user=user,
-                city=city,
-                date=date
+                icon=file,
             )
 
             new_user = authenticate(
@@ -67,37 +61,43 @@ class ProfileDetail(View):
 
     @staticmethod
     def get_random_goods():
-        max_id = shop_models.Goods.objects.all().aggregate(max_id=Max("id"))['max_id']
+        max_id = shop_models.Product.objects.all().aggregate(max_id=Max("id"))['max_id']
         while True:
             pk = random.randint(1, max_id)
-            goods = shop_models.Goods.objects.filter(pk=pk).first()
+            goods = shop_models.Product.objects.filter(pk=pk).first()
             if goods:
                 return goods
+            else:
+                return None
 
     @staticmethod
     def get_random_services():
-        max_id = shop_models.Service.objects.all().aggregate(max_id=Max("id"))['max_id']
+        max_id = shop_models.Product.objects.all().aggregate(max_id=Max("id"))['max_id']
         while True:
             pk = random.randint(1, max_id)
-            goods = shop_models.Service.objects.filter(pk=pk).first()
+            goods = shop_models.Product.objects.filter(pk=pk).first()
             if goods:
                 return goods
+            else:
+                return None
 
     def get(self, request, pk):
         try:
             user = request.user.id
-            page_user = get_object_or_404(models.Profile, user_id=user)
-            user_icon = models.ProfileIcon.objects.filter(user_id=user).get()
-            form = forms.UpdateIcon
-            product_1 = cache.get_or_set("product1", self.get_random_goods(), 30 * 60)
-            product_2 = cache.get_or_set("product2", self.get_random_goods(), 30 * 60)
-            product_3 = cache.get_or_set("product3", self.get_random_services(), 30 * 60)
-            product_4 = cache.get_or_set("product4", self.get_random_services(), 30 * 60)
-
+            page_user = get_object_or_404(models.Profile, user=user)
+            product_1 = cache.get_or_set("product1", self.get_random_goods(), 3 * 60)
+            product_2 = cache.get_or_set("product2", self.get_random_goods(), 3 * 60)
+            product_3 = cache.get_or_set("product3", self.get_random_services(), 3 * 60)
+            product_4 = cache.get_or_set("product4", self.get_random_services(), 3 * 60)
+            author_products = user_models.Profile.objects.annotate(
+                products=Count("product"),
+            )
+            goods = author_products[0].products
+            balance_form = forms.UpdateBalance()
             return render(request, "profile/profile_detail.html", {
                 "profile": page_user,
-                "icon": user_icon,
-                "form": form,
+                "goods": goods,
+                "balance_form": balance_form,
                 "product1": product_1,
                 "product2": product_2,
                 "product3": product_3,
@@ -106,41 +106,46 @@ class ProfileDetail(View):
         except Http404:
             return render(request, "profile/profile_detail.html", {"moderation": True})
 
-    def post(self, request, pk, *args, **kwargs):
-        form = forms.UpdateIcon(request.POST, request.FILES)
-        print(pk)
+    @transaction.atomic()
+    def post(self, request, pk):
+        form = forms.UpdateBalance(request.POST)
         if form.is_valid():
-            icon = form.cleaned_data.get("profile_icon")
-            models.ProfileIcon.objects.filter(id=pk).update_or_create(
-                icon=icon,
-                user=pk
-            )
-        return redirect("user_detail", pk)
+            profile = user_models.Profile.objects.get(user_id=request.user.id)
+            balance = profile.balance
+            profile.balance = form.cleaned_data.get("balance") + balance
+            profile.save()
+            return redirect("user_detail", pk)
 
 
 class UserEdit(View):
     """
     Страница для редактирования профиля
     """
+
     def get(self, request, pk):
         form = forms.UpdateProfile
         return render(request, "profile/profile_edit.html", {"form": form})
 
     def post(self, request, pk):
-        form = forms.UpdateProfile(request.POST)
+        form = forms.UpdateProfile(request.POST, request.FILES)
 
         if form.is_valid():
             first_name = form.cleaned_data.get("first_name")
             last_name = form.cleaned_data.get("last_name")
             about = form.cleaned_data.get("about")
-            models.User.objects.filter(id=request.user.id).update(
-                first_name=first_name,
-                last_name=last_name,
-            )
-            models.Profile.objects.filter(id=pk).update(
-                about=about
-            )
-            return redirect("user_detail", pk)
+            icon = form.cleaned_data.get("icon")
+
+            user = models.User.objects.get(id=request.user.id)
+            user.first_name = first_name
+            user.last_name = last_name
+            profile = models.Profile.objects.get(id=pk)
+            profile.about = about
+            profile.icon = icon
+            user.save()
+            profile.save()
+        else:
+            print(form.errors)
+        return redirect("user_detail", pk)
 
 
 class LoginPage(LoginView):
@@ -184,7 +189,6 @@ class UserListAPI(ListAPIView):
     filterset_class = filters.UsersFilter
 
 
-
 class ProfileListApi(ListAPIView):
     """
     API с выводом информации о пользователях модели Profile
@@ -201,4 +205,3 @@ class ProfileListApi(ListAPIView):
     serializer_class = serializers.ProfileSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = filters.ProfileFilter
-

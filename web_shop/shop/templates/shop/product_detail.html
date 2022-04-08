@@ -10,14 +10,9 @@
 {% block login %}
 {% endblock %}
 {% block content %}
-
     <div id="leftbar">
-        {% if files %}
-            {% for file in files %}
-                {% if file.product_id == object.id %}
-            <img src="{{ file.image.url }}" width="100px">
-                {% endif %}
-            {% endfor %}
+        {% if object.image %}
+        <img src="{{ object.image.url }}" width="100px">
         {% endif %}
         <p>
             <strong>{% trans 'Author' %}: </strong>{{ object.author }}
@@ -31,6 +26,12 @@
         <p>
             <strong>{% trans 'Created at' %}: </strong>{{ object.created_at }}
         </p>
+        <p class="price">${{ product.price }}</p>
+        <form action="{% url 'cart:cart_add' object.id %}" method="post">
+            {{ cart }}
+            {% csrf_token %}
+            <input type="submit" value="{% trans 'Add to cart' %}">
+        </form>
     </div>
 
     <div id="middle">

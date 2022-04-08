@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-09 18:38+0300\n"
+"POT-Creation-Date: 2022-04-01 17:03+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,137 +20,175 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: .\registration\apps.py:7
-msgid "users"
-msgstr "пользователи"
+#: .\cart\templates\cart_detail.html:5 .\cart\templates\cart_detail.html:8
+msgid "Your shopping cart"
+msgstr "Ваша корзина"
 
-#: .\registration\forms.py:15
-msgid "Profile icon"
-msgstr "Изображение профиля"
-
-#: .\registration\forms.py:16 .\registration\forms.py:41
-#: .\registration\templates\profile\profile_detail.html:49
-msgid "Nickname"
-msgstr "Никнейм"
-
-#: .\registration\forms.py:17 .\registration\forms.py:50
-#: .\registration\templates\profile\profile_detail.html:55
-msgid "First name"
-msgstr "Имя"
-
-#: .\registration\forms.py:18 .\registration\forms.py:51
-#: .\registration\templates\profile\profile_detail.html:52
-msgid "Last name"
-msgstr "Фамилия"
-
-#: .\registration\forms.py:19 .\registration\forms.py:42
-#: .\registration\templates\registration\login.html:21
-msgid "Password"
-msgstr "Пароль"
-
-#: .\registration\forms.py:20
-msgid "Password confirm"
-msgstr "Подтверждение пароля"
-
-#: .\registration\forms.py:21
-msgid "Email"
-msgstr "Email"
-
-#: .\registration\forms.py:25
-#: .\registration\templates\profile\profile_detail.html:58
-msgid "Birthday"
-msgstr "День рождения"
-
-#: .\registration\forms.py:28
-msgid "Phone number"
-msgstr "Номер телефона"
-
-#: .\registration\forms.py:29
-msgid "Your city"
-msgstr "Ваш город"
-
-#: .\registration\forms.py:44
-msgid "Incorrect login or password"
-msgstr "Некорректный логин или пароль"
-
-#: .\registration\forms.py:45
-msgid "Your profile deactivated"
-msgstr "Ваш профиль отключен от системы"
-
-#: .\registration\forms.py:52
-msgid "About"
-msgstr "О нас"
-
-#: .\registration\forms.py:56
+#: .\cart\templates\cart_detail.html:12
 msgid "Image"
 msgstr "Изображение"
 
-#: .\registration\models.py:8
+#: .\cart\templates\cart_detail.html:13
+msgid "Product"
+msgstr "Товар"
+
+#: .\cart\templates\cart_detail.html:14
+msgid "Quantity"
+msgstr "Количиство"
+
+#: .\cart\templates\cart_detail.html:15 .\cart\templates\cart_detail.html:34
+msgid "Remove"
+msgstr "Удалить"
+
+#: .\cart\templates\cart_detail.html:16
+msgid "Unit price"
+msgstr "Цена за шт"
+
+#: .\cart\templates\cart_detail.html:17
+#: .\shop\templates\shop\product_detail.html:24
+msgid "Price"
+msgstr "Цена"
+
+#: .\cart\templates\cart_detail.html:48
+msgid "Continue shopping"
+msgstr "Продолжить покупки"
+
+#: .\cart\templates\cart_detail.html:49
+msgid "Checkout"
+msgstr "Оплатить"
+
+#: .\registration\apps.py:7
+msgid "registration"
+msgstr "Регистрация"
+
+#: .\registration\forms.py:31
+msgid "Profile icon"
+msgstr "Изображение профиля"
+
+#: .\registration\forms.py:32 .\registration\forms.py:55
+#: .\registration\templates\profile\profile_detail.html:89
+msgid "Nickname"
+msgstr "Никнейм"
+
+#: .\registration\forms.py:33 .\registration\forms.py:74
+#: .\registration\templates\profile\profile_detail.html:95
+msgid "First name"
+msgstr "Имя"
+
+#: .\registration\forms.py:34 .\registration\forms.py:75
+#: .\registration\templates\profile\profile_detail.html:92
+msgid "Last name"
+msgstr "Фамилия"
+
+#: .\registration\forms.py:35 .\registration\forms.py:56
+#: .\registration\templates\registration\login.html:22
+msgid "Password"
+msgstr "Пароль"
+
+#: .\registration\forms.py:36
+msgid "Password confirm"
+msgstr "Подтверждение пароля"
+
+#: .\registration\forms.py:37
+msgid "Email"
+msgstr "Email"
+
+#: .\registration\forms.py:58
+msgid "Incorrect login or password"
+msgstr "Некорректный логин или пароль"
+
+#: .\registration\forms.py:59
+msgid "Your profile deactivated"
+msgstr "Ваш профиль отключен от системы"
+
+#: .\registration\forms.py:76
+msgid "About"
+msgstr "О нас"
+
+#: .\registration\forms.py:77
+msgid "Icon"
+msgstr "Изображение"
+
+#: .\registration\forms.py:81
+#: .\registration\templates\profile\profile_detail.html:68
+msgid "Balance"
+msgstr "Баланс"
+
+#: .\registration\models.py:22
 msgid "user"
 msgstr "пользователь"
 
-#: .\registration\models.py:9
-msgid "city"
-msgstr "город"
-
-#: .\registration\models.py:10
-msgid "about"
-msgstr "о себе"
-
-#: .\registration\models.py:11
-msgid "date"
-msgstr "дата рождения"
-
-#: .\registration\models.py:13
-msgid "phone"
-msgstr "телефон"
-
-#: .\registration\models.py:14
+#: .\registration\models.py:23
 msgid "verification"
 msgstr "верификация"
 
-#: .\registration\models.py:14
+#: .\registration\models.py:24
 msgid "balance"
 msgstr "баланс"
 
-#: .\registration\models.py:20
+#: .\registration\models.py:31
 msgid "profile"
 msgstr "профиль"
 
-#: .\registration\models.py:21
+#: .\registration\models.py:32
 msgid "profiles"
 msgstr "профили"
 
-#: .\registration\templates\profile\profile_detail.html:32
-msgid "Confirm"
-msgstr "Подтвердить"
-
-#: .\registration\templates\profile\profile_detail.html:38
-
+#: .\registration\templates\profile\profile_detail.html:60
 msgid "About user"
 msgstr "О пользователе"
 
-#: .\registration\templates\profile\profile_detail.html:40
+#: .\registration\templates\profile\profile_detail.html:62
 msgid ""
 "Sorry but this user so fast and furious, and ... there no text about him"
-msgstr "Извините, но этот пользователь настолько быстр и яростен, что текст о нём не успевает за ним."
+msgstr ""
+"Извините, но этот пользователь настолько быстр и яростен, что текст о нём не "
+"успевает за ним."
+
+#: .\registration\templates\profile\profile_detail.html:80
+msgid "Pay balance"
+msgstr "Пополнить баланс"
+
+#: .\registration\templates\profile\profile_detail.html:86
+msgid "Edit user info"
+msgstr "Редактировать информацию"
+
+#: .\registration\templates\profile\profile_detail.html:98
+msgid "Birthday"
+msgstr "День рождения"
+
+#: .\registration\templates\profile\profile_detail.html:101
+msgid "Goods publiched"
+msgstr "Опубликованные товары"
+
+#: .\registration\templates\profile\profile_detail.html:104
+msgid "Services published"
+msgstr "Опубликованные услуги"
+
+#: .\registration\templates\profile\profile_edit.html:7
+msgid "Edit profile"
+msgstr "Редактировать профиль"
+
+#: .\registration\templates\profile\profile_edit.html:22
+msgid "Edit"
+msgstr "Редактировать"
 
 #: .\registration\templates\registration\login.html:7
-#: .\registration\templates\registration\login.html:26
-#: .\shop\templates\main\main.html:30
+#: .\registration\templates\registration\login.html:27
+#: .\shop\templates\main\main.html:31
 msgid "Log in"
 msgstr "Вход"
 
-#: .\registration\templates\registration\login.html:16
+#: .\registration\templates\registration\login.html:17
 msgid "Login"
 msgstr "Логин"
 
-#: .\registration\templates\registration\login.html:29
+#: .\registration\templates\registration\login.html:30
 msgid "Forgot your password?"
 msgstr "Забыли пароль?"
 
 #: .\registration\templates\registration\registration.html:7
-#: .\shop\templates\main\main.html:29
+#: .\shop\templates\main\main.html:30
 msgid "Registration"
 msgstr "Регистрация"
 
@@ -158,78 +196,57 @@ msgstr "Регистрация"
 msgid "Registrate"
 msgstr "Зарегистрироваться"
 
-#: .\shop\forms.py:7 .\shop\forms.py:29
-msgid "Title"
-msgstr "Название"
-
-#: .\shop\forms.py:8 .\shop\forms.py:30
-msgid "Description"
-msgstr "Описание"
-
-#: .\shop\forms.py:20 .\shop\forms.py:42
-msgid "Images to upload"
-msgstr "Изображения к загрузке"
-
-#: .\shop\models.py:7 .\shop\models.py:35
-msgid "author"
-msgstr "автор"
-
-#: .\shop\models.py:8 .\shop\models.py:36
+#: .\shop\models.py:27
 msgid "title"
 msgstr "название"
 
-#: .\shop\models.py:9 .\shop\models.py:37
+#: .\shop\models.py:28
 msgid "description"
 msgstr "описание"
 
-#: .\shop\models.py:10 .\shop\models.py:38
+#: .\shop\models.py:29
 msgid "price"
 msgstr "цена"
 
-#: .\shop\models.py:11 .\shop\models.py:39
+#: .\shop\models.py:30
 msgid "created date"
 msgstr "дата создания"
 
-#: .\shop\models.py:18
+#: .\shop\models.py:37
 msgid "status"
 msgstr "статус"
 
-#: .\shop\models.py:58 .\shop\models.py:74
+#: .\shop\models.py:40
 msgid "image"
 msgstr "изображение"
 
-#: .\shop\templates\main\main.html:24
+#: .\shop\templates\main\main.html:25
 msgid "Hello"
 msgstr "Привет"
 
-#: .\shop\templates\main\main.html:25
+#: .\shop\templates\main\main.html:26
 msgid "Profile"
 msgstr "Профиль"
 
-#: .\shop\templates\main\main.html:26
+#: .\shop\templates\main\main.html:27
 msgid "Log out"
 msgstr "Выход"
 
-#: .\shop\templates\main\main.html:28
+#: .\shop\templates\main\main.html:29
 msgid "Hello anonymous"
 msgstr "Привет аноним"
 
-#: .\shop\templates\main\main.html:60
+#: .\shop\templates\main\main.html:61
 msgid "Home"
 msgstr "Домашняя"
 
-#: .\shop\templates\main\main.html:61
+#: .\shop\templates\main\main.html:62
 msgid "About Us"
 msgstr "О нас"
 
-#: .\shop\templates\main\main.html:62 .\shop\templates\shop\goods_list.html:5
-msgid "Goods"
+#: .\shop\templates\main\main.html:63 .\shop\templates\shop\product_list.html:5
+msgid "Products"
 msgstr "Товары"
-
-#: .\shop\templates\main\main.html:63
-#: .\shop\templates\shop\services_list.html:5
-msgid "Services"
-msgstr "Услуги"
 
 #: .\shop\templates\main\main.html:64 .\shop\templates\shop\privacy.html:5
 msgid "Privacy"
@@ -239,22 +256,26 @@ msgstr "Конфиденциальность"
 msgid "Contact Us"
 msgstr "Контакты"
 
-#: .\shop\templates\main\main.html:73
+#: .\shop\templates\main\main.html:66
+msgid "Cart"
+msgstr "Корзина"
+
+#: .\shop\templates\main\main.html:75
 msgid "Level up your characters!"
 msgstr "Прокачай своего персонажа"
 
-#: .\shop\templates\main\main.html:74
+#: .\shop\templates\main\main.html:76
 msgid ""
 "Are you wanna waste your time in game? Call our drivers, and enjoy your time"
 msgstr ""
 "Ты правда хочешь тратить время в игре? Позови наших драйверов и используй "
 "своё время с пользой"
 
-#: .\shop\templates\main\main.html:79
+#: .\shop\templates\main\main.html:83
 msgid "Boost for your accounts"
 msgstr "Улучши свой аккаунт"
 
-#: .\shop\templates\main\main.html:80
+#: .\shop\templates\main\main.html:84
 msgid ""
 "Are you need some money or items? Call our drivers and they bring it only "
 "for you!"
@@ -262,19 +283,19 @@ msgstr ""
 "Тебе нужны деньги? Предметы? Позови наших драйверов и они принесут их только "
 "для тебя"
 
-#: .\shop\templates\main\main.html:85
+#: .\shop\templates\main\main.html:91
 msgid "ACCOUNTS!"
 msgstr "АККАУНТЫ!"
 
-#: .\shop\templates\main\main.html:86
+#: .\shop\templates\main\main.html:92
 msgid "Need powerful account with something rare? Look for it here!"
 msgstr "Нужен сильнейший аккаунт с чем-нибудь редким? Посмотри тут!"
 
-#: .\shop\templates\main\main.html:91
+#: .\shop\templates\main\main.html:99
 msgid "Game items in short time! Look for it here"
 msgstr "Игровые предметы за короткий срок? Посмотри их здесь"
 
-#: .\shop\templates\main\main.html:92
+#: .\shop\templates\main\main.html:100
 msgid "Rare items! Powerful artifacts! Yea, it is here!"
 msgstr "Редкие предметы! Сильнейшие артефакты! Да, это здесь"
 
@@ -340,15 +361,6 @@ msgstr "Глобальные цели"
 msgid "Our Commitment"
 msgstr "Наши обязательства"
 
-#: .\shop\templates\shop\goods_list.html:11
-msgid "Our goods"
-msgstr "Наши товары"
-
-#: .\shop\templates\shop\goods_list.html:28
-#: .\shop\templates\shop\services_list.html:28
-msgid "Detail"
-msgstr "Детали"
-
 #: .\shop\templates\shop\main_page.html:10
 msgid "Main page"
 msgstr "Главная"
@@ -365,6 +377,80 @@ msgstr "Используй наш сайт и наших драйверов"
 msgid "Enjoy our site right now!"
 msgstr "Пользуйся нашим сайтом прямо сейчас!"
 
-#: .\shop\templates\shop\services_list.html:11
+#: .\shop\templates\shop\privacy.html:59
+msgid "websites privacy policy"
+msgstr ""
+
+#: .\shop\templates\shop\product_detail.html:18
+msgid "Author"
+msgstr "Автор"
+
+#: .\shop\templates\shop\product_detail.html:27
+msgid "Created at"
+msgstr "Дата создания"
+
+#: .\shop\templates\shop\product_detail.html:33
+msgid "Add to cart"
+msgstr ""
+
+#: .\shop\templates\shop\product_detail.html:39
+msgid "Description"
+msgstr "Описание"
+
+#: .\shop\templates\shop\product_list.html:10
 msgid "Our services"
 msgstr "Наши услуги"
+
+#: .\shop\templates\shop\product_list.html:26
+msgid "Detail"
+msgstr "Детали"
+
+#: .\shop\templates\shop\product_list.html:42
+msgid "next"
+msgstr ""
+
+#: .\shop\templates\shop\product_list.html:43
+msgid "last"
+msgstr ""
+
+#~ msgid "Phone number"
+#~ msgstr "Номер телефона"
+
+#~ msgid "Your city"
+#~ msgstr "Ваш город"
+
+#~ msgid "Goods"
+#~ msgstr "Товары"
+
+#~ msgid "city"
+#~ msgstr "город"
+
+#~ msgid "about"
+#~ msgstr "о себе"
+
+#~ msgid "date"
+#~ msgstr "дата рождения"
+
+#~ msgid "phone"
+#~ msgstr "телефон"
+
+#~ msgid "author"
+#~ msgstr "автор"
+
+#~ msgid "Services"
+#~ msgstr "Услуги"
+
+#~ msgid "Our goods"
+#~ msgstr "Наши товары"
+
+#~ msgid "users"
+#~ msgstr "пользователи"
+
+#~ msgid "Confirm"
+#~ msgstr "Подтвердить"
+
+#~ msgid "Title"
+#~ msgstr "Название"
+
+#~ msgid "Images to upload"
+#~ msgstr "Изображения к загрузке"
