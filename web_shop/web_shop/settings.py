@@ -40,9 +40,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'django_filters',
-    'cart',
-    'registration',
-    'shop',
+    'app_cart',
+    'app_registration',
+    'app_shop',
 
 ]
 
@@ -85,7 +85,7 @@ CACHES = {
 }
 # Session
 SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
-CART_SESSION_ID = 'cart'
+CART_SESSION_ID = 'app_cart'
 
 WSGI_APPLICATION = 'web_shop.wsgi.application'
 
